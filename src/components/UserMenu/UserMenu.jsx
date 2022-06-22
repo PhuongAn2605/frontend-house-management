@@ -17,6 +17,15 @@ const UserMenu = ({ userName, logout, isLoggedIn, error }) => {
   const [errors, setErrors] = React.useState(error);
   const open = Boolean(anchorEl);
 
+  const classes = theme => ({
+    menuItem: {
+      border: '1px solid #ccc',
+      padding: '0.5rem',
+      borderRadius: '10px',
+      margin: "0.5rem"
+    }
+    });
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -62,7 +71,7 @@ const UserMenu = ({ userName, logout, isLoggedIn, error }) => {
           "aria-labelledby": "basic-button",
         }}
       >
-        <MenuItem><Link to="/">My house</Link></MenuItem>
+        <MenuItem className={{ root: classes.menuItem }}><Link to="/">My house</Link></MenuItem>
         <MenuItem><Link to="/other-houses">Other houses</Link></MenuItem>
         <MenuItem onClick={logoutHandler}>Logout</MenuItem>
       </Menu>
