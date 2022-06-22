@@ -1,0 +1,10 @@
+const NotificationTypes = {
+    GET_LAST_LOGIN_START: 'GET_LAST_LOGIN_START',
+    GET_LAST_LOGIN_SUCCESS: 'GET_LAST_LOGIN_SUCCESS',
+
+    GET_EXPIRE_PRODUCT_NOTI: 'GET_EXPIRE_PRODUCT_NOTI',
+
+    FETCH_FAILURE: 'FETCH_FAILURE'
+};
+
+export default NotificationTypes;

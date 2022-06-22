@@ -1,0 +1,79 @@
+.MuiList-root.MuiList-padding.MuiMenu-list.css-6hp17o-MuiList-root-MuiMenu-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start !important;
+  padding: 1rem;
+}
+
+/* .dthUto{
+    margin: 0.5 auto;
+    text-align: center;
+} */
+
+.MuiBox-root.css-tn9ygg {
+  margin-left: 9.5rem !important;
+}
+
+.MuiMenuItem-root.MuiMenuItem-gutters.MuiButtonBase-root.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  margin: 0.5rem;
+  border-radius: 10px;
+  text-align: start;
+}
+
+.MuiMenuItem-root.MuiMenuItem-gutters.MuiButtonBase-root.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {
+  background-color: transparent;
+  color: white;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation24.MuiDialog-paper.MuiDialog-paperScrollPaper.MuiDialog-paperWidthSm.css-1t1j96h-MuiPaper-root-MuiDialog-paper {
+  max-height: 100% !important;
+  max-width: 80% !important;
+}
+
+.MuiDialogActions-root.MuiDialogActions-spacing.css-hlj6pa-MuiDialogActions-root {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* margin: 0.5rem; */
+}
+
+.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.MuiButtonBase-root.css-1e6y48t-MuiButtonBase-root-MuiButton-root {
+  padding: 0.5rem;
+}
+
+.MuiButton-root.MuiButton-text.MuiButton-textPrimary.MuiButton-sizeMedium.MuiButton-textSizeMedium.MuiButtonBase-root.css-1e6y48t-MuiButtonBase-root-MuiButton-root:hover {
+  /* background-color: rgb(98, 175, 233); */
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.MuiSelect-select.MuiSelect-outlined.MuiOutlinedInput-input.MuiInputBase-input.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+  padding: 1rem;
+  text-align: center;
+}
+
+.MuiInputAdornment-root.MuiInputAdornment-positionStart.MuiInputAdornment-standard.MuiInputAdornment-sizeMedium.css-ittuaa-MuiInputAdornment-root {
+  display: none;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiAlert-root.MuiAlert-filledError {
+  background-color: rgb(197 42 42) !important;
+  color: #fff !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiAlert-root.MuiAlert-filledSuccess {
+  background-color: rgb(59 159 29) !important;
+  color: #fff !important;
+}
+
+.MuiMenuItem-root.MuiMenuItem-gutters.MuiButtonBase-root.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root:hover {
+  background-color: #eee;
+  color: black;
+}
+
+.basic-single {
+  width: 80%;
+  margin: 1rem auto;
+}

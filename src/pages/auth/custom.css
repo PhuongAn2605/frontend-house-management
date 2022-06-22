@@ -1,0 +1,32 @@
+.MuiOutlinedInput-input.MuiInputBase-input.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input{
+    background-color: #fff;
+    border: none;
+    border-radius: 10px;
+    width: 300px;
+    color: #fff;
+}
+
+.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root.Mui-focuesed{
+    color: #fff;
+    font-weight: 700;
+}
+
+.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.MuiFormLabel-root.MuiFormLabel-colorPrimary.css-14s5rfu-MuiFormLabel-root-MuiInputLabel-root{
+    /* font-weight: 700; */
+
+}
+.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-outlined.MuiFormLabel-root.MuiFormLabel-colorPrimary.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    color: rgb(130, 106, 240);
+    font-weight: 700;
+    font-size: 20px;
+
+}
+
+.MuiButton-root.MuiButton-contained.MuiButton-containedPrimary.MuiButton-sizeMedium.MuiButton-containedSizeMedium.MuiButtonBase-root .css-1kz64yn-MuiButtonBase-root-MuiButton-root{
+    color: #fff !important;
+}
+
+
+.MuiOutlinedInput-notchedOutline.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+    display: none;
+}

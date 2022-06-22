@@ -1,0 +1,12 @@
+.MuiInputAdornment-root.MuiInputAdornment-positionStart.MuiInputAdornment-standard.MuiInputAdornment-sizeMedium.css-ittuaa-MuiInputAdornment-root {
+  display: none;
+}
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiAlert-root.MuiAlert-filledError {
+  background-color: rgb(197 42 42) !important;
+  color: #fff !important;
+}
+
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation0.MuiAlert-root.MuiAlert-filledSuccess {
+  background-color: rgb(59 159 29) !important;
+  color: #fff !important;
+}
