@@ -72,8 +72,8 @@ const UserMenu = ({ userName, logout, isLoggedIn, error }) => {
         }}
       >
         <MenuItem className={{ root: classes.menuItem }}><Link to="/">My house</Link></MenuItem>
-        <MenuItem><Link to="/other-houses">Other houses</Link></MenuItem>
-        <MenuItem onClick={logoutHandler}>Logout</MenuItem>
+        <MenuItem className={{ root: classes.menuItem }}><Link to="/other-houses">Other houses</Link></MenuItem>
+        <MenuItem className={{ root: classes.menuItem }} onClick={logoutHandler}>Logout</MenuItem>
       </Menu>
     </React.Fragment>
   );
