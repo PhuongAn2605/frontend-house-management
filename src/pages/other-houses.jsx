@@ -94,7 +94,7 @@ const OtherHousePage = ({
   return (
     <OtherHousesPageStyle>
       <div>
-          <NavBar />
+          {/* <NavBar /> */}
       <HouseTitleStyle>
         <span>Friends' House</span>
         <SearchBarForm
