@@ -41,7 +41,7 @@ export function* addProduct(payload) {
 
     const result = yield axios({
       method: "post",
-      url: "http://localhost:5000/api/product/create/" + userName,
+      url: "https://backend-house-management.herokuapp.com/" + userName,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -102,7 +102,7 @@ export function* editProduct(payload) {
 
     const result = yield axios({
       method: "patch",
-      url: "http://localhost:5000/api/product/edit/" + id,
+      url: "https://backend-house-management.herokuapp.com/" + id,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });

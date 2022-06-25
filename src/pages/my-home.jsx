@@ -341,7 +341,7 @@ const MyHome = ({
                   <Item
                     key={p._id}
                     id={p._id}
-                    imageUrl={`http://localhost:5000/${p.image}`}
+                    imageUrl={`https://backend-house-management.herokuapp.com/${p.image}`}
                     productName={p.productName}
                     functions={p.functions}
                     description={p.description}
