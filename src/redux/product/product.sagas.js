@@ -41,7 +41,7 @@ export function* addProduct(payload) {
 
     const result = yield axios({
       method: "post",
-      url: "https://backend-house-management.herokuapp.com/" + userName,
+      url: "https://backend-house-management.herokuapp.com/api/product/create/" + userName,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
