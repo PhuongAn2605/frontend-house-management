@@ -22,7 +22,6 @@ import "./DialogFormEdit.css";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
 import Box from "@mui/material/Box";
 import {
   addProductStart,
@@ -32,6 +31,7 @@ import {
 import isEmpty from "is-empty";
 import { closeDialog, openDialog } from "../../redux/dialog/dialog-actions.js";
 import { formProductValidation } from "../utils/formValidation.js";
+import Select from 'react-select';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -69,6 +69,12 @@ BootstrapDialogTitle.propTypes = {
   children: PropTypes.node,
   onClose: PropTypes.func.isRequired,
 };
+
+const options = [
+  { value: 'Ngồi', label: 'Ngồi' },
+  { value: 'Trang trí', label: 'Trang trí' },
+  { value: 'Để đồ', label: 'Để đồ' }
+]
 
 let DialogFormEdit = ({
   addProduct,
@@ -120,6 +126,11 @@ let DialogFormEdit = ({
   const [imageValue, setImage] = useState(image);
   const [openAlertEditSuccess, setOpenAlertSuccess] = useState(false);
   const [openAlertEditFailure, setOpenAlertFailure] = useState(false);
+  const [editFunction, setEditFunction] = useState(functions);
+
+  useEffect(() => {
+    setEditFunction(options.find(opt => opt.value == functions)); 
+  }, []);
 
   const handleDialogOpen = () => {
     setOpenDialogEdit(true);
@@ -241,12 +252,21 @@ let DialogFormEdit = ({
               />
             </Typography>
             <Typography gutterBottom>
-              <Box sx={{ maxWidth: 200 }} style={{ margin: "auto" }}>
+            <Select 
+                  options={options}
+                  defaultValue={editFunction}
+                  className="basic-single"
+                  classNamePrefix="select"
+                  name="functions"
+                  id="functions"
+                  />
+              {/* <Box sx={{ maxWidth: 200 }} style={{ margin: "auto" }}>
                 <FormControl style={{ minWidth: 420 }} size="large">
                   <InputLabel id="demo-simple-select-label">
                     Chọn chức năng
-                  </InputLabel>
-                  <Select
+                  </InputLabel> */}
+                  
+                  {/* <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={functionsValue}
@@ -279,9 +299,9 @@ let DialogFormEdit = ({
                     ) : (
                       <MenuItem value={"Đựng đồ"}>Đựng đồ</MenuItem>
                     )}
-                  </Select>
-                </FormControl>
-              </Box>
+                  </Select> */}
+                {/* </FormControl>
+              </Box> */}
             </Typography>
 
             <Typography gutterBottom>

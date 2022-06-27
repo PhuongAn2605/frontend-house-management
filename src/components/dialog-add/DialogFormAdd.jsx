@@ -79,8 +79,8 @@ BootstrapDialogTitle.propTypes = {
 const options = [
   { value: 'Ngồi', label: 'Ngồi' },
   { value: 'Trang trí', label: 'Trang trí' },
-  { value: 'Để đồ', label: 'Để đồ' }
-]
+  { value: 'Đựng đồ', label: 'Đựng đồ' }
+];
 let DialogFormAdd = (props) => {
   const {addProduct, userName, productImage, errorFromState, initialValues, message} = props;
   const [open, setOpen] = useState(false);

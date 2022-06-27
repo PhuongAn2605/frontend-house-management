@@ -190,7 +190,10 @@ const MyHome = ({
 }) => {
   // const houseIdParam = useParams().houseId;
   // console.log(houseIdParam);
+// useEffect(() => {
+//   console.log('products: ', products)
 
+// }, [products])
   const navigate = useNavigate();
   const [isLikeHouse, setIsLikeHouse] = useState(false);
   const [likeHouseCount, setLikeHouseCount] = useState(
