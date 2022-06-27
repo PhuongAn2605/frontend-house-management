@@ -102,7 +102,7 @@ export function* editProduct(payload) {
 
     const result = yield axios({
       method: "patch",
-      url: "https://backend-house-management.herokuapp.com/" + id,
+      url: "https://backend-house-management.herokuapp.com/api/product/edit/" + id,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });

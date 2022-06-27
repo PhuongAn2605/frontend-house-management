@@ -300,7 +300,7 @@ let DialogFormEdit = ({
               id="image"
               center="center"
               onInput={inputHandler}
-              imageUrl={`http://localhost:5000/${imageValue}`}
+              imageUrl={`https://backend-house-management.herokuapp.com/${imageValue}`}
             />
           </Typography>
         </DialogContent>
