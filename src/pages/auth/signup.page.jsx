@@ -68,7 +68,10 @@ let SignUp = ({ signup, errorFromState }) => {
       return;
     }
 
-    navigate("/login");
+    if (isEmpty(errorFromState)) {
+      navigate("/login");
+      return;
+    }
   };
 
   const onChangePasswordHandler = (e) => {

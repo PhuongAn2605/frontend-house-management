@@ -14,7 +14,7 @@ import {
 } from "./product.actions";
 import axios from "axios";
 import isEmpty from "is-empty";
-import { toastError, toastSuccess } from "../../utils/ToastHelper/toastHelper";
+import { toast } from "react-toastify";
 
 export function* addProduct(payload) {
   const { product, userName } = payload.payload;
@@ -41,7 +41,8 @@ export function* addProduct(payload) {
 
     const result = yield axios({
       method: "post",
-      url: "https://backend-house-management.herokuapp.com/api/product/create/" + userName,
+      // url: "https://backend-house-management.herokuapp.com/api/product/create/" + userName,
+      url: "http://localhost:5000/api/product/create/" + userName,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -49,7 +50,7 @@ export function* addProduct(payload) {
     const data = result.data;
     if(result.status === 201) {
       yield put(addProductSuccess(data));
-      toastSuccess(data.message);
+      toast.success(data?.message)
     }
   } catch (error) {
     yield put(fetchFailure(error));
@@ -102,7 +103,8 @@ export function* editProduct(payload) {
 
     const result = yield axios({
       method: "patch",
-      url: "https://backend-house-management.herokuapp.com/api/product/edit/" + id,
+      // url: "https://backend-house-management.herokuapp.com/api/product/edit/" + id,
+      url: "http://localhost:5000/api/product/edit/" + id,
       data: formData,
       headers: { "Content-Type": "multipart/form-data" },
     });
@@ -128,9 +130,12 @@ export function* deleteProduct(payload) {
     const result = Http.delete("/product/delete/" + id);
 
     const data = result.data;
+
     yield put(deleteProductSuccess(id));
+    toast.success('Delete product successfully!')
   } catch (error) {
     yield put(fetchFailure(error));
+    toast.error(error)
   }
 }
 
@@ -152,6 +157,8 @@ export function* searchProductByName (payload) {
     yield put(searchProductByNameSuccess(data));
   }catch(error){
     yield put(searchProductFailure(error));
+    toast.error(error);
+
   }
 }
 
@@ -173,6 +180,8 @@ export function* searchProductByLocation(payload) {
     yield put(searchProductByLocationSuccess(data));
   }catch(error){
     yield put(searchProductFailure(error));
+    toast.error(error);
+
   }
 }
 

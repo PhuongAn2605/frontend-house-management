@@ -1,6 +1,5 @@
 import AuthTypes from "./auth.types";
 import { login } from "./auth.utils";
-import { useNavigate } from "react-router-dom";
 
 const INITIAL_STATE = {
   isLoggedIn: false,
@@ -21,11 +20,15 @@ const INITIAL_STATE = {
 const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case AuthTypes.SIGN_UP_START:
+      console.log('SIGN_UP_START')
+
       return {
         ...state,
         error: null
       }
     case AuthTypes.SIGN_UP_SUCCESS:
+      console.log('SIGN_UP_SUCCESS')
+
       const { userName, token } = action.payload;
 
       return {
@@ -38,10 +41,11 @@ const authReducer = (state = INITIAL_STATE, action) => {
       };
 
     case AuthTypes.SIGN_UP_FAILURE:
+      console.log('action.payload.message: ', action.payload)
       return {
         ...state,
         isLoggedIn: false,
-        error: action.payload,
+        error: action.payload.message,
       };
     case AuthTypes.LOGIN_START:
       return {

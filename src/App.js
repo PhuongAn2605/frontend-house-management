@@ -1,21 +1,17 @@
+import { useEffect } from "react";
+import { connect } from "react-redux";
+import { Route, Routes } from "react-router-dom";
+import { Slide, ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 import "./App.css";
-import Header from "./components/header/Header.component";
-import { Routes, Route } from "react-router-dom";
 import Login from "./pages/auth/login.page";
 import Signup from "./pages/auth/signup.page";
-import { useCallback, useEffect } from "react";
-import { connect } from "react-redux";
-import {
-  fetchLoginStart,
-  fetchLoginSuccess,
-  fetchLogoutStart,
-} from "./redux/auth/auth.actions";
 import MyHome from "./pages/my-home";
-import { useNavigate } from "react-router-dom";
-import { fetchProductStart } from "./redux/product/product.actions";
 import OtherHousePage from "./pages/other-houses";
-import isEmpty from "is-empty";
-import { login } from "./redux/auth/auth.utils";
+import {
+  fetchLoginStart, fetchLogoutStart
+} from "./redux/auth/auth.actions";
+import { fetchProductStart } from "./redux/product/product.actions";
 
 let logoutTimer;
 const App = ({
@@ -82,6 +78,8 @@ const App = ({
           }
         />
       </Routes>
+      <ToastContainer hideProgressBar position="top-right" transition={Slide} />
+
     </div>
   );
 };

@@ -1,37 +1,33 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 
-import PropTypes from "prop-types";
+import CloseIcon from "@mui/icons-material/Close";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import { styled } from "@mui/material/styles";
 import moment from "moment";
+import PropTypes from "prop-types";
 import { Field, formValueSelector, reduxForm } from "redux-form";
 
-import InputForm from "../input/Input.component.jsx";
-import { DialogStyle, AddTextStyle } from "./DialogFormEdit.js";
-import { Alert, Input, Snackbar, Typography } from "@mui/material";
+import { Alert, Snackbar, Typography } from "@mui/material";
 import ImageUpload from "../input/ImageUpload.js";
+import InputForm from "../input/Input.component.jsx";
 import "./DialogFormEdit.css";
+import { AddTextStyle, DialogStyle } from "./DialogFormEdit.js";
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Box from "@mui/material/Box";
+import isEmpty from "is-empty";
+import Select from "react-select";
+import { closeDialog, openDialog } from "../../redux/dialog/dialog-actions.js";
 import {
   addProductStart,
   editProductStart,
   getProductByIdStart,
 } from "../../redux/product/product.actions.js";
-import isEmpty from "is-empty";
-import { closeDialog, openDialog } from "../../redux/dialog/dialog-actions.js";
 import { formProductValidation } from "../utils/formValidation.js";
-import Select from 'react-select';
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -56,7 +52,7 @@ const BootstrapDialogTitle = (props) => {
             position: "absolute",
             color: (theme) => theme.palette.grey[500],
           }}
-          style={{ marginLeft: "auto"}}
+          style={{ marginLeft: "auto" }}
         >
           <CloseIcon />
         </IconButton>
@@ -71,10 +67,10 @@ BootstrapDialogTitle.propTypes = {
 };
 
 const options = [
-  { value: 'Ngồi', label: 'Ngồi' },
-  { value: 'Trang trí', label: 'Trang trí' },
-  { value: 'Để đồ', label: 'Để đồ' }
-]
+  { value: "Ngồi", label: "Ngồi" },
+  { value: "Trang trí", label: "Trang trí" },
+  { value: "Để đồ", label: "Để đồ" },
+];
 
 let DialogFormEdit = ({
   addProduct,
@@ -105,7 +101,6 @@ let DialogFormEdit = ({
     shortName,
     location,
     image,
-    houseId,
     functions,
     expiration,
     description,
@@ -129,8 +124,8 @@ let DialogFormEdit = ({
   const [editFunction, setEditFunction] = useState(functions);
 
   useEffect(() => {
-    setEditFunction(options.find(opt => opt.value == functions)); 
-  }, []);
+    setEditFunction(options.find((opt) => opt.value === functions));
+  }, [functions]);
 
   const handleDialogOpen = () => {
     setOpenDialogEdit(true);
@@ -252,21 +247,21 @@ let DialogFormEdit = ({
               />
             </Typography>
             <Typography gutterBottom>
-            <Select 
-                  options={options}
-                  defaultValue={editFunction}
-                  className="basic-single"
-                  classNamePrefix="select"
-                  name="functions"
-                  id="functions"
-                  />
+              <Select
+                options={options}
+                defaultValue={editFunction}
+                className="basic-single"
+                classNamePrefix="select"
+                name="functions"
+                id="functions"
+              />
               {/* <Box sx={{ maxWidth: 200 }} style={{ margin: "auto" }}>
                 <FormControl style={{ minWidth: 420 }} size="large">
                   <InputLabel id="demo-simple-select-label">
                     Chọn chức năng
                   </InputLabel> */}
-                  
-                  {/* <Select
+
+              {/* <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={functionsValue}
@@ -300,7 +295,7 @@ let DialogFormEdit = ({
                       <MenuItem value={"Đựng đồ"}>Đựng đồ</MenuItem>
                     )}
                   </Select> */}
-                {/* </FormControl>
+              {/* </FormControl>
               </Box> */}
             </Typography>
 
@@ -320,7 +315,8 @@ let DialogFormEdit = ({
               id="image"
               center="center"
               onInput={inputHandler}
-              imageUrl={`https://backend-house-management.herokuapp.com/${imageValue}`}
+              // imageUrl={`https://backend-house-management.herokuapp.com/${imageValue}`}
+              imageUrl={`http://localhost:5000/${imageValue}`}
             />
           </Typography>
         </DialogContent>
@@ -407,7 +403,6 @@ DialogFormEdit = connect((state) => {
   return {
     initialValues: !isEmpty(editProduct) && {
       productName: editProduct.productName,
-      // productName: "Test",
       shortName: editProduct.shortName,
       location: editProduct.location,
       expiration: moment(editProduct.expiration).format("yyyy-MM-DD"),

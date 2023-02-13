@@ -1,26 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import PropTypes from "prop-types";
+import CloseIcon from "@mui/icons-material/Close";
+import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
 import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
 import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
-import { Alert, Snackbar, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 
-import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
-import { red } from "@mui/material/colors";
 import { styled } from "@mui/material/styles";
 
-import { DialogStyle, AddTextStyle } from "./DialogFormDelete.js";
 import "./DialogFormDelete.css";
+import { AddTextStyle, DialogStyle } from "./DialogFormDelete.js";
 
+import isEmpty from "is-empty";
 import { closeDialog, openDialog } from "../../redux/dialog/dialog-actions.js";
 import { deleteProductStart } from "../../redux/product/product.actions.js";
-import isEmpty from "is-empty";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
   "& .MuiDialogContent-root": {
@@ -45,7 +43,7 @@ const BootstrapDialogTitle = (props) => {
             position: "absolute",
             color: (theme) => theme.palette.grey[500],
           }}
-          style={{ marginLeft: "auto"}}
+          style={{ marginLeft: "auto" }}
         >
           <CloseIcon />
         </IconButton>
@@ -59,13 +57,15 @@ BootstrapDialogTitle.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
-const DialogFormDelete = ({ id, products, deleteProduct, errorFromState, message }) => {
+const DialogFormDelete = ({
+  id,
+  products,
+  deleteProduct,
+  errorFromState,
+  message,
+}) => {
   const productToDelete = products.find((p) => p._id === id);
   const [open, setOpenDialogEdit] = useState(false);
-
-  const [noti, setNoti] = useState(null);
-  const [openAlertDeleteSuccess, setOpenAlertDeleteSuccess] = useState(false);
-  const [openAlertDeleteFailure, setOpenAlertDeleteFailure] = useState(false);
 
   const handleDialogOpen = () => {
     setOpenDialogEdit(true);
@@ -79,28 +79,7 @@ const DialogFormDelete = ({ id, products, deleteProduct, errorFromState, message
       setTimeout(() => {
         deleteProduct(id);
       }, 1000);
-
-      if (!isEmpty(errorFromState)) {
-        setNoti("Deleting failed!");
-        setOpenAlertDeleteFailure(true);
-        setOpenAlertDeleteSuccess(false);
-        handleDialogDeleteClose();
-
-      } else {
-        setNoti("Delete successfully!");
-        setOpenAlertDeleteSuccess(true);
-        setOpenAlertDeleteFailure(false);
-        handleDialogDeleteClose();
-      }
     }
-  };
-
-  const handleCloseDeleteAlert = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlertDeleteSuccess(false);
-    setOpenAlertDeleteFailure(false);
   };
 
   return (
@@ -146,37 +125,6 @@ const DialogFormDelete = ({ id, products, deleteProduct, errorFromState, message
           </Button>
         </DialogActions>
       </BootstrapDialog>
-      <Snackbar
-        open={openAlertDeleteSuccess}
-        autoHideDuration={3000}
-        onClose={handleCloseDeleteAlert}
-      >
-        <Alert
-          onClose={handleCloseDeleteAlert}
-          severity="success"
-          variant="filled"
-          color="success"
-          sx={{ width: "100%" }}
-        >
-          {noti}
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={openAlertDeleteFailure}
-        autoHideDuration={3000}
-        onClose={handleCloseDeleteAlert}
-        color="error"
-      >
-        <Alert
-          onClose={handleCloseDeleteAlert}
-          variant="filled"
-          color="error"
-          severity="error"
-          sx={{ width: "100%" }}
-        >
-          {noti}
-        </Alert>
-      </Snackbar>
     </DialogStyle>
   );
 };
@@ -188,7 +136,7 @@ const mapStateToProps = (state) => ({
   openDialog: state.dialog.openDialog,
   products: state.product.products,
   errorFromState: state.product.error,
-  message: state.product.message
+  message: state.product.message,
 });
 
 const mapDispatchToProps = (dispatch) => ({

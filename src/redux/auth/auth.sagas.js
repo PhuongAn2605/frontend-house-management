@@ -1,16 +1,16 @@
-import { put, all, takeLatest, call } from "@redux-saga/core/effects";
+import { all, call, put, takeLatest } from "@redux-saga/core/effects";
 import isEmpty from "is-empty";
+import { toast } from "react-toastify";
 import Http from "../../utils/http";
-import { fetchProductStart, fetchProductSuccess } from "../product/product.actions";
+import { fetchProductStart } from "../product/product.actions";
 import {
-  fetchLoginFailure,
+  fetchCheckPasswordFailure,
+  fetchCheckPasswordSuccess, fetchLoginFailure,
   fetchLoginSuccess,
   fetchLogoutFailure,
   fetchLogoutSuccess,
   fetchSignupFailure,
-  fetchSignupSuccess,
-  fetchCheckPasswordFailure,
-  fetchCheckPasswordSuccess,
+  fetchSignupSuccess
 } from "./auth.actions";
 import AuthTypes from "./auth.types";
 
@@ -21,10 +21,13 @@ export function* fetchSignup(payload) {
       userName,
       password,
     });
+
     const data = result.data;
 
     yield put(fetchSignupSuccess(data));
+    toast.success(data.message)
   } catch (error) {
+    toast.error(error);
     yield put(fetchSignupFailure(error));
   }
 }
@@ -35,7 +38,6 @@ export function* fetchSignupWatcher() {
 
 export function* fetchLogin(payload) {
   const { userName, password } = payload.payload;
-
   try {
     const result = yield Http.post("/user/login", {
       userName,
@@ -44,13 +46,16 @@ export function* fetchLogin(payload) {
 
     const data = result.data;
     if (!isEmpty(data)) {
+      toast.error('Something went wrong!')
       yield put(fetchLoginSuccess(data));
       yield put(fetchProductStart({ userName: data.userName }));
     } else {
       yield put(fetchLoginFailure("error"));
     }
   } catch (error) {
+    toast.error(error)
     yield put(fetchLoginFailure(error));
+
   }
 }
 

@@ -1,52 +1,35 @@
-import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
 import isEmpty from "is-empty";
-import MenuItem from "@mui/material/MenuItem";
-import InputLabel from "@mui/material/InputLabel";
-import FormControl from "@mui/material/FormControl";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 // import Select from "@mui/material/Select";
-import Box from "@mui/material/Box";
-import { Alert, Snackbar, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
-import PropTypes from "prop-types";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import DialogContent from "@mui/material/DialogContent";
-import DialogActions from "@mui/material/DialogActions";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 import AddCircleOutlineOutlinedIcon from "@mui/icons-material/AddCircleOutlineOutlined";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
 import { red } from "@mui/material/colors";
-import { styled } from "@mui/material/styles";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import PropTypes from "prop-types";
 
-import InputForm from "../input/Input.component.jsx";
-import { AddDialogStyle, DialogStyle, AddTextStyle } from "./DialogFormAdd.js";
 import ImageUpload from "../input/ImageUpload.js";
+import InputForm from "../input/Input.component.jsx";
 import "./DialogFormAdd.css";
+import { AddDialogStyle, AddTextStyle, DialogStyle } from "./DialogFormAdd.js";
 
-import { addProductStart } from "../../redux/product/product.actions.js";
-import { useNavigate } from "react-router";
-import { closeDialog, openDialog } from "../../redux/dialog/dialog-actions.js";
-import { Field, formValueSelector, reduxForm } from "redux-form";
-import { formProductValidation } from "../utils/formValidation.js";
-import SelectField from "../input/SelectField.jsx";
 import moment from "moment";
-import Select from 'react-select';
-
-const BootstrapDialog = styled(Dialog)(({ theme }) => ({
-  "& .MuiDialogContent-root": {
-    padding: theme.spacing(2),
-  },
-  "& .MuiDialogActions-root": {
-    padding: theme.spacing(1),
-  },
-  minWidth:' 80%'
-}));
+import Select from "react-select";
+import { Field, formValueSelector, reduxForm } from "redux-form";
+import { closeDialog, openDialog } from "../../redux/dialog/dialog-actions.js";
+import { addProductStart } from "../../redux/product/product.actions.js";
+import { formProductValidation } from "../utils/formValidation.js";
 
 const BootstrapDialogTitle = (props) => {
   const { children, onClose, pristine, reset, submitting, ...others } = props;
-  
+
   return (
     <DialogTitle sx={{ m: 0, p: 2 }} {...others}>
       {children}
@@ -57,9 +40,9 @@ const BootstrapDialogTitle = (props) => {
           sx={{
             position: "absolute",
             color: (theme) => theme.palette.grey[500],
-            marginLeft: "auto"
+            marginLeft: "auto",
           }}
-          style={{ marginLeft: "auto"}}
+          style={{ marginLeft: "auto" }}
         >
           <CloseIcon />
         </IconButton>
@@ -77,14 +60,13 @@ BootstrapDialogTitle.propTypes = {
 //   expiration: moment(),
 // }
 const options = [
-  { value: 'Ngồi', label: 'Ngồi' },
-  { value: 'Trang trí', label: 'Trang trí' },
-  { value: 'Đựng đồ', label: 'Đựng đồ' }
+  { value: "Ngồi", label: "Ngồi" },
+  { value: "Trang trí", label: "Trang trí" },
+  { value: "Đựng đồ", label: "Đựng đồ" },
 ];
 let DialogFormAdd = (props) => {
-  const {addProduct, userName, productImage, errorFromState, initialValues, message} = props;
+  const { addProduct, userName, productImage, initialValues } = props;
   const [open, setOpen] = useState(false);
-  const [noti, setNoti] = useState(null);
   const [proName, setProName] = useState("");
   const [shortName, setShortName] = useState("");
   const [location, setLocation] = useState("");
@@ -93,22 +75,28 @@ let DialogFormAdd = (props) => {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState(productImage);
 
-  const [openAlertSuccess, setOpenAlertSuccess] = useState(false);
-  const [openAlertFailure, setOpenAlertFailure] = useState(false);
   const [validExpiration, setValidExpiration] = useState(false);
   const [invalid, setInValid] = useState(true);
 
   useEffect(() => {
-    props.initialize(initialValues);
+    props.initialize({
+      initialValues,
+    });
   }, [open]);
 
   useEffect(() => {
-    if(!isEmpty(proName) && !isEmpty(shortName) && !isEmpty(location) && !isEmpty(expiration) && validExpiration) {
+    if (
+      !isEmpty(proName) &&
+      !isEmpty(shortName) &&
+      !isEmpty(location) &&
+      !isEmpty(expiration) &&
+      validExpiration
+    ) {
       setInValid(false);
     } else {
       setInValid(true);
     }
-  }, [proName, shortName, location, expiration, validExpiration])
+  }, [proName, shortName, location, expiration, validExpiration]);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -118,8 +106,8 @@ let DialogFormAdd = (props) => {
     setProName("");
     setShortName("");
     setLocation("");
-    setExpiration("");
-    setFunctions("");
+    setExpiration(initialValues?.expiration);
+    setFunctions(initialValues?.functions);
     setDescription("");
     setImage(null);
   };
@@ -144,48 +132,41 @@ let DialogFormAdd = (props) => {
       userName,
     };
 
-      setTimeout(() => {
-        addProduct(data);
-      }, 2000);
-      // addProduct(data);
+    setTimeout(() => {
+      addProduct(data);
+    }, 2000);
+    // addProduct(data);
 
-      handleClose();
-      setProName("");
-      setShortName("");
-      setLocation("");
-      setExpiration("");
-      setFunctions("");
-      setDescription("");
-      setImage(null);
+    handleClose();
+    setProName("");
+    setShortName("");
+    setLocation("");
+    setExpiration("");
+    setFunctions("");
+    setDescription("");
+    setImage(null);
 
-    if (!isEmpty(errorFromState)) {
-      setNoti("Adding failed!");
-      setOpenAlertFailure(true);
-      setOpenAlertSuccess(false);
-      // handleClose();
-    } else {
-      setNoti("Add successfully!");
-      setOpenAlertSuccess(true);
-      setOpenAlertFailure(false);
-      // handleClose();
-    }
-
-   
-  };
-
-  const handleCloseAlert = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlertSuccess(false);
-    setOpenAlertFailure(false);
+    // if (!isEmpty(errorFromState)) {
+    //   setNoti("Adding failed!");
+    //   setOpenAlertFailure(true);
+    //   setOpenAlertSuccess(false);
+    //   // handleClose();
+    // } else {
+    //   setNoti("Add successfully!");
+    //   setOpenAlertSuccess(true);
+    //   setOpenAlertFailure(false);
+    //   // handleClose();
+    // }
   };
 
   useEffect(() => {
-    if(!isEmpty(expiration) && (moment(expiration).isBefore(moment())) 
-    && (moment(expiration).format('YYYY-MM-DD') !== (moment().format('YYYY-MM-DD'))) ){
+    if (
+      !isEmpty(expiration) &&
+      moment(expiration).isBefore(moment()) &&
+      moment(expiration).format("YYYY-MM-DD") !== moment().format("YYYY-MM-DD")
+    ) {
       setValidExpiration(false);
-    } else if(!isEmpty(expiration)){
+    } else if (!isEmpty(expiration)) {
       setValidExpiration(true);
     }
   }, [expiration]);
@@ -223,7 +204,13 @@ let DialogFormAdd = (props) => {
           }}
           dividers
         >
-          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'flex-start'}}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "flex-start",
+            }}
+          >
             <Typography gutterBottom>
               <Field
                 id="Tên sản phẩm"
@@ -265,7 +252,7 @@ let DialogFormAdd = (props) => {
               />
             </Typography>
             <Typography gutterBottom>
-              <Select 
+              <Select
                 options={options}
                 defaultValue={options[0]}
                 className="basic-single"
@@ -320,12 +307,18 @@ let DialogFormAdd = (props) => {
           <Button autoFocus onClick={handleClose}>
             Cancel
           </Button>
-          <Button autoFocus onClick={(e) => addProductHandler(e)} disabled={invalid}>
+          <Button
+            autoFocus
+            onClick={(e) => addProductHandler(e)}
+            disabled={invalid}
+          >
             Add Product
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
+
+      {/* use Snackbar to show notification */}
+      {/* <Snackbar
         open={openAlertSuccess}
         autoHideDuration={3000}
         onClose={handleCloseAlert}
@@ -339,8 +332,8 @@ let DialogFormAdd = (props) => {
         >
           {noti}
         </Alert>
-      </Snackbar>
-      <Snackbar
+      </Snackbar> */}
+      {/* <Snackbar
         open={openAlertFailure}
         autoHideDuration={3000}
         onClose={handleCloseAlert}
@@ -355,7 +348,7 @@ let DialogFormAdd = (props) => {
         >
           {noti}
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
     </DialogStyle>
   );
 };

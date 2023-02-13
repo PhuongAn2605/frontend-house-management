@@ -46,7 +46,6 @@ const HeaderStyle = styled.div`
   background-color: #ebf0f5;
   box-shadow: 5px 5px 5px #888888;
   /* margin-right: 1rem; */
-
 `;
 
 const NavBarStyle = styled.div``;
@@ -186,14 +185,13 @@ const MyHome = ({
   setHouseComments,
   isLoggedIn,
   authComments,
-
 }) => {
   // const houseIdParam = useParams().houseId;
   // console.log(houseIdParam);
-// useEffect(() => {
-//   console.log('products: ', products)
+  // useEffect(() => {
+  //   console.log('products: ', products)
 
-// }, [products])
+  // }, [products])
   const navigate = useNavigate();
   const [isLikeHouse, setIsLikeHouse] = useState(false);
   const [likeHouseCount, setLikeHouseCount] = useState(
@@ -252,9 +250,9 @@ const MyHome = ({
   };
 
   const initialValues = {
-    expiration: moment().format('YYYY-MM-DD'),
-    functions: 'Ngồi'
-  }
+    expiration: moment().format("YYYY-MM-DD"),
+    functions: "Ngồi",
+  };
 
   return (
     <div>
@@ -344,7 +342,8 @@ const MyHome = ({
                   <Item
                     key={p._id}
                     id={p._id}
-                    imageUrl={`https://backend-house-management.herokuapp.com/${p.image}`}
+                    // imageUrl={`https://backend-house-management.herokuapp.com/${p.image}`}
+                    imageUrl={`http://localhost:5000/${p.image}`}
                     productName={p.productName}
                     functions={p.functions}
                     description={p.description}

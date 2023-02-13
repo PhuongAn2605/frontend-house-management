@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const Http = axios.create({
-  baseURL: "https://backend-house-management.herokuapp.com/api/",
+  // baseURL: "https://backend-house-management.herokuapp.com/api/",
+  baseURL: "http://localhost:5000/api/",
   timeout: 60000,
 });
 

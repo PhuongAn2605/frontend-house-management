@@ -12,7 +12,6 @@ import {
 import SearchBarForm from "../components/search-bar/SearchBar.jsx";
 import NavBar from "../components/nav-bar/NavBar.jsx";
 
-
 const OtherHousesPageStyle = styled.div`
   text-align: center;
   margin: auto;
@@ -57,7 +56,7 @@ const CenterAllHouses = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-`
+`;
 
 const OtherHousePage = ({
   fetchAllHouse,
@@ -91,37 +90,38 @@ const OtherHousePage = ({
   const friendHouses = houses.filter((h) => h.name.split("'s")[0] !== userName);
   const otherHouses = isSearch ? searchedHouses : friendHouses;
 
+  console.log("otherHouses: ", otherHouses);
   return (
     <OtherHousesPageStyle>
       <div>
-          {/* <NavBar /> */}
-      <HouseTitleStyle>
-        <span>Friends' House</span>
-        <SearchBarForm
-          style={{ width: "50%" }}
-          searchHouseName={true}
-          friendHouses={friendHouses}
-        />
-        <UserMenu />
-      </HouseTitleStyle>
+        {/* <NavBar /> */}
+        <HouseTitleStyle>
+          <span>Friends' House</span>
+          <SearchBarForm
+            style={{ width: "50%" }}
+            searchHouseName={true}
+            friendHouses={friendHouses}
+          />
+          <UserMenu />
+        </HouseTitleStyle>
       </div>
 
       <CenterAllHouses style={{ margin: "auto" }}>
-      {!isEmpty(otherHouses) ? (
-        otherHouses.map((h) => (
-          <OtherHouseStyle
-            key={h._id}
-            onClick={() => {
-              getHouseByIdHandler(h._id);
-            }}
-          >
-            <OtherHousesIcon color="primary" fontSize="large" />
-            <HouseNameStyle>{h.name}</HouseNameStyle>
-          </OtherHouseStyle>
-        ))
-      ) : (
-        <OtherHouseStyle>Not found any friends'house!</OtherHouseStyle>
-      )}
+        {!isEmpty(otherHouses) ? (
+          otherHouses.map((h) => (
+            <OtherHouseStyle
+              key={h._id}
+              onClick={() => {
+                getHouseByIdHandler(h._id);
+              }}
+            >
+              <OtherHousesIcon color="primary" fontSize="large" />
+              <HouseNameStyle>{h.name}</HouseNameStyle>
+            </OtherHouseStyle>
+          ))
+        ) : (
+          <OtherHouseStyle>Not found any friends'house!</OtherHouseStyle>
+        )}
       </CenterAllHouses>
     </OtherHousesPageStyle>
   );

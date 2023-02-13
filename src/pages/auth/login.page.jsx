@@ -1,30 +1,28 @@
+import { ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
-import ButtonForm from "../../components/button/Button.component";
 import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { fetchLoginStart } from "../../redux/auth/auth.actions";
-import { ThemeProvider } from "@mui/material/styles";
 import { Field, formValueSelector, reduxForm } from "redux-form";
+import ButtonForm from "../../components/button/Button.component";
+import { fetchLoginStart } from "../../redux/auth/auth.actions";
 
-import UserImage from "../../images/user.png";
 import KeyImage from "../../images/key.png";
+import UserImage from "../../images/user.png";
 import "./custom.css";
 
 import isEmpty from "is-empty";
 
+import { loginValidation } from "../utils/formValidation";
 import {
-  theme,
+  AuthPageStyle,
   ErrorTextStyle,
   PasswordButtonStyle,
-  TextHeaderStyle,
-  AuthPageStyle,
-  LeftItemsStyle,
   RightItemsStyle,
+  theme,
 } from "../utils/utils.styles";
+import AuthInputForm from "./AuthInputForm";
 import LeftItem from "./LeftItem";
 import TitleItem from "./TitleItem";
-import AuthInputForm from "./AuthInputForm";
-import { loginValidation } from "../utils/formValidation";
 
 let Login = ({ login, errorFormState }) => {
   const [userNameValue, setUserNameValue] = useState("");
@@ -42,12 +40,11 @@ let Login = ({ login, errorFormState }) => {
 
   const loginHandler = (userName, password, e) => {
     e.preventDefault();
-    if(userName && password){
+    if (userName && password) {
       setTimeout(() => {
         login(userName, password);
       }, 1000);
     }
-
     if (!isEmpty(errorFormState)) {
       setErrors("Opps, wrong username or password!");
       return;
@@ -118,14 +115,14 @@ const mapStateToProps = (state) => ({
 
 Login = reduxForm({
   form: "loginForm",
-  validate: loginValidation
+  validate: loginValidation,
 })(Login);
 
 const selector = formValueSelector("loginForm");
 
-Login = connect(state => ({
+Login = connect((state) => ({
   userName: selector(state, "userName"),
-  password: selector(state, "password")
+  password: selector(state, "password"),
 }))(Login);
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
